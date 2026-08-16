@@ -1,7 +1,9 @@
 import { Router } from "express";
 import movies from "../data/movies.js"
-import validateUpdate from "../middlewares/validateMovieUpdate.js"
+import { validateUpdate, validateMovie } from "../middlewares/validateMovieUpdate.js"
+
 const router = Router()
+const id = 1
 
 router.get("/", (req, res) => {
     const filteredMovies = [...movies]
@@ -45,7 +47,25 @@ router.patch("/:id", validateUpdate, (req, res) => {
     })
 
 })
-router.post("/", (req, res) => { })
+router.post("/", validateMovie, (req, res) => {
+    const title = req.body.title
+    const genre = req.body.genre
+    const watched = req.body.watched
+    const rating = req.body.rating
+    const newMovie = {
+        "id": id,
+        "title": title,
+        "genre": genre,
+        "watched": watched,
+        "rating": rating
+    }
+    movies.push(newMovie)
+    id++
+    return res.status(201).json({
+        message: "Movie created successfully",
+        data: newMovie
+    })
+})
 router.delete("/:id", (req, res) => { })
 
 export { router }
