@@ -21,12 +21,19 @@ router.get("/", (req, res) => {
     }
 
 
-    res.status(200).json({
+    return res.status(200).json({
         data: filteredMovies
     })
 })
 router.get("/:id", (req, res) => {
-
+    const id = req.params.id
+    const movie = movies.find(m => m.id === Number(id))
+    if (!movie) {
+        return res.status(404).json({ message: "Movie not found." })
+    }
+    return res.status(200).json({
+        data: movie
+    })
 })
 router.patch("/:id", (req, res) => { })
 router.post("/", (req, res) => { })
