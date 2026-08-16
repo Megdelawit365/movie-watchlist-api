@@ -1,7 +1,8 @@
-const notFound = (req, res) => {
+const notFound = (req, res, next) => {
     res.status(404).json({
         message: "Path not found."
     })
+    next()
 }
 
 export default notFound
