@@ -36,6 +36,7 @@ const validateUpdate = (req, res, next) => {
         })
     }
 
+    req.movie = movie
     next()
 
 }
