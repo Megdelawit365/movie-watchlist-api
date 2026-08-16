@@ -1,6 +1,6 @@
 import { Router } from "express";
 import movies from "../data/movies.js"
-import { validateUpdate, validateMovie } from "../middlewares/validateMovieUpdate.js"
+import { validateUpdate, validateMovie } from "../middlewares/validateMovie.js"
 
 const router = Router()
 const id = 1
