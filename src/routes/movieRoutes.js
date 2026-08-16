@@ -1,6 +1,6 @@
 import { Router } from "express";
 import movies from "../data/movies.js"
-
+import validateUpdate from "../middlewares/validateMovieUpdate.js"
 const router = Router()
 
 router.get("/", (req, res) => {
@@ -20,7 +20,6 @@ router.get("/", (req, res) => {
         filteredMovies = filteredMovies.filter(m => search in String(m.title))
     }
 
-
     return res.status(200).json({
         data: filteredMovies
     })
@@ -35,7 +34,17 @@ router.get("/:id", (req, res) => {
         data: movie
     })
 })
-router.patch("/:id", (req, res) => { })
+router.patch("/:id", validateUpdate, (req, res) => {
+    const movie = req.movie
+    for (const [k, v] of Object.entries(req.body)) {
+        movie[k] = v
+    }
+    return res.status(200).json({
+        message: "Movie updated successfully.",
+        data: movie
+    })
+
+})
 router.post("/", (req, res) => { })
 router.delete("/:id", (req, res) => { })
 
