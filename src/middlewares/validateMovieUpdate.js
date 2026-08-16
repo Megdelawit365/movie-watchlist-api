@@ -5,6 +5,11 @@ const validateUpdate = (req, res, next) => {
     const watched = req.body.watched
     const rating = req.body.rating
 
+    const movie = movies.find(m => m.id === Number(id))
+    if (!movie) {
+        return res.status(404).json({ message: "Movie not found." })
+    }
+
     if (title != undefined && (title.trim() === "" || typeof (title) != "string")) {
         return res.status(400).json({
             message: "Invalid title."
