@@ -66,6 +66,13 @@ router.post("/", validateMovie, (req, res) => {
         data: newMovie
     })
 })
-router.delete("/:id", (req, res) => { })
+router.delete("/:id", (req, res) => {
+    const movie = movies.find(m => m.id === Number(id))
+    if (!movie) {
+        return res.status(404).json({ message: "Movie not found." })
+    }
+    movies = movies.filter(m => String(m.id) !== req.params.id)
+    return res.status(204)
+})
 
 export { router }
