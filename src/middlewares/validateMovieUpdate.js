@@ -41,4 +41,36 @@ const validateUpdate = (req, res, next) => {
 
 }
 
-export default validateUpdate
+const validateMovie = (req, res, next) => {
+    const title = req.body.title
+    const genre = req.body.genre
+    const watched = req.body.watched
+    const rating = req.body.rating
+
+
+    if (title === undefined || title.trim() === "" || typeof (title) != "string") {
+        return res.status(400).json({
+            message: "Invalid title."
+        })
+    }
+
+    if (genre === undefined || (genre.trim() === "" || typeof (genre) != "string")) {
+        return res.status(400).json({
+            message: "Invalid genre."
+        })
+    }
+    if (watched === undefined || typeof (watched) != "boolean") {
+        return res.status(400).json({
+            message: "Invalid watched status."
+        })
+    }
+    if (rating === undefined || (typeof (rating) != "number" || rating < 1 || rating > 5)) {
+        return res.status(400).json({
+            message: "Invalid rating."
+        })
+    }
+
+    next()
+}
+
+export default { validateUpdate, validateMovie }
