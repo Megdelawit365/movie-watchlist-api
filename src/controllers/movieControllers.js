@@ -27,7 +27,7 @@ const updateMovie = (req, res) => {
 
     return res.status(200).json({
         message: "Movie updated successfully.",
-        data: updateMovie
+        data: updatedMovie
     })
 
 }

@@ -13,7 +13,7 @@ const validateUpdate = (req, res, next) => {
         return res.status(404).json({ message: "Movie not found." })
     }
 
-    if (title != undefined && (title.trim() === "" || typeof (title) != "string")) {
+    if (title != undefined && (typeof (title) != "string" || title.trim() === "")) {
         return res.status(400).json({
             message: "Invalid title."
         })
@@ -23,7 +23,7 @@ const validateUpdate = (req, res, next) => {
             message: "Id cannot be updated."
         })
     }
-    if (genre != undefined && (genre.trim() === "" || typeof (genre) != "string")) {
+    if (genre != undefined && (typeof (genre) != "string" || genre.trim() === "")) {
         return res.status(400).json({
             message: "Invalid genre."
         })
