@@ -1,5 +1,5 @@
 import movies from "../data/movies.js"
-let id = 1
+let id = 2
 
 const getAllMovies = () => {
     const filteredMovies = [...movies]
