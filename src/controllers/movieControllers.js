@@ -1,7 +1,8 @@
 import * as movieService from "../services/movieServices.js"
 
 const getAllMovies = (req, res) => {
-    const allMovies = movieService.getAllMovies()
+    const queries = req.query
+    const allMovies = movieService.getAllMovies(queries)
 
     return res.status(200).json({
         data: allMovies

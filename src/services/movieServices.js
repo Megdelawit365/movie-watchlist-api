@@ -1,20 +1,20 @@
 import movies from "../data/movies.js"
 let id = 2
 
-const getAllMovies = () => {
+const getAllMovies = (query) => {
     const filteredMovies = [...movies]
 
-    if ("watched" in req.query) {
-        const watched = req.query.watched
+    if ("watched" in query) {
+        const watched = query.watched
         filteredMovies = filteredMovies.filter(m => String(m.watched) === watched)
     }
-    if ("genre" in req.query) {
-        const genre = req.query.genre
+    if ("genre" in query) {
+        const genre = query.genre
         filteredMovies = filteredMovies.filter(m => String(m.genre) === genre)
 
     }
-    if ("search" in req.query) {
-        const search = req.query.search
+    if ("search" in query) {
+        const search = query.search
         filteredMovies = filteredMovies.filter(m => search in String(m.title))
     }
 
@@ -30,7 +30,7 @@ const getMovieById = (id) => {
 }
 
 const updateMovie = (body, movie) => {
-    for (const [k, v] of Object.entries(req.body)) {
+    for (const [k, v] of Object.entries(body)) {
         movie[k] = v
     }
     return movie

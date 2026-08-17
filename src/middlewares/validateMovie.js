@@ -1,6 +1,9 @@
+import movies from "../data/movies.js"
+
 const validateUpdate = (req, res, next) => {
     const title = req.body.title
-    const id = req.body.id
+    const id = req.params.id
+    const bodyId = req.body.id
     const genre = req.body.genre
     const watched = req.body.watched
     const rating = req.body.rating
@@ -15,7 +18,7 @@ const validateUpdate = (req, res, next) => {
             message: "Invalid title."
         })
     }
-    if (id != undefined) {
+    if (bodyId != undefined) {
         return res.status(400).json({
             message: "Id cannot be updated."
         })

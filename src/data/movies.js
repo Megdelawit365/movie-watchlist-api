@@ -7,6 +7,11 @@ const movies = [
         "rating": 2
     }
 
+
+
 ]
 
+
+
 export default movies
+

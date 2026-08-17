@@ -5,6 +5,7 @@ const requireApiKey = (req, res, next) => {
             message: "Api key is missing or incorrect."
         })
     }
+    next()
 }
 
 export default requireApiKey
