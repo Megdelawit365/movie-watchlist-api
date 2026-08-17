@@ -21,4 +21,12 @@ const getAllMovies = () => {
     return filteredMovies
 }
 
-export { getAllMovies }
+const getMovieById = (id) => {
+    const movie = movies.find(m => m.id === Number(id))
+    if (!movie) {
+        return null
+    }
+    return movie
+}
+
+export { getAllMovies, getMovieById }

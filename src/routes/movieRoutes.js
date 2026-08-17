@@ -1,22 +1,13 @@
 import { Router } from "express";
 import { validateUpdate, validateMovie } from "../middlewares/validateMovie.js"
 import requireApiKey from "../middlewares/requireApiKey.js";
-import { getAllMovies } from "../controllers/movieControllers.js";
+import { getAllMovies, getMovieById } from "../controllers/movieControllers.js";
 
 const router = Router()
 const id = 1
 
 router.get("/", getAllMovies)
-router.get("/:id", (req, res) => {
-    const id = req.params.id
-    const movie = movies.find(m => m.id === Number(id))
-    if (!movie) {
-        return res.status(404).json({ message: "Movie not found." })
-    }
-    return res.status(200).json({
-        data: movie
-    })
-})
+router.get("/:id", getMovieById)
 router.patch("/:id", requireApiKey, validateUpdate, (req, res) => {
     const movie = req.movie
     for (const [k, v] of Object.entries(req.body)) {
