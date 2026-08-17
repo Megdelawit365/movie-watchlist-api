@@ -2,7 +2,7 @@ import movies from "../data/movies.js"
 let id = 2
 
 const getAllMovies = (query) => {
-    const filteredMovies = [...movies]
+    let filteredMovies = [...movies]
 
     if ("watched" in query) {
         const watched = query.watched
@@ -15,7 +15,7 @@ const getAllMovies = (query) => {
     }
     if ("search" in query) {
         const search = query.search
-        filteredMovies = filteredMovies.filter(m => search in String(m.title))
+        filteredMovies = filteredMovies.filter(m => m.title.toLowerCase().includes(search.toLowerCase()))
     }
 
     return filteredMovies
@@ -54,11 +54,11 @@ const createMovie = (body) => {
     return newMovie
 }
 const deleteMovie = (id) => {
-    const movie = movies.find(m => m.id === Number(id))
-    if (!movie) {
+    const index = movies.findIndex(m => m.id === Number(id))
+    if (index === -1) {
         return null
     }
-    movies = movies.filter(m => String(m.id) !== id)
+    movies.splice(index, 1)
     return true
 }
 

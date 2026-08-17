@@ -1,7 +1,7 @@
 import { Router } from "express";
 import requireApiKey from "../middlewares/requireApiKey.js";
 import { createMovie, deleteMovie, getAllMovies, getMovieById } from "../controllers/movieControllers.js";
-import { updateMovie } from "../services/movieServices.js";
+import { updateMovie } from "../controllers/movieControllers.js";
 import { validateMovie, validateUpdate } from "../middlewares/validateMovie.js";
 
 const router = Router()
