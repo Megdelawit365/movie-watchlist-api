@@ -19,4 +19,33 @@ const getMovieById = (req, res) => {
     })
 }
 
-export { getAllMovies, getMovieById }
+const updateMovie = (req, res) => {
+    const movie = req.movie
+    const body = req.body
+    const updatedMovie = movieService.updateMovie(body, movie)
+
+    return res.status(200).json({
+        message: "Movie updated successfully.",
+        data: updateMovie
+    })
+
+}
+
+const createMovie = (req, res) => {
+    const body = req.body
+    const newMovie = movieService.createMovie(body)
+    return res.status(201).json({
+        message: "Movie created successfully",
+        data: newMovie
+    })
+}
+
+const deleteMovie = (req, res) => {
+    const movie = movieService.deleteMovie(req.params.id)
+    if (!movie) {
+        return res.status(404).json({ message: "Movie not found." })
+    }
+    return res.status(204)
+}
+
+export { getAllMovies, getMovieById, updateMovie, createMovie, deleteMovie }

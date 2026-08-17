@@ -1,50 +1,16 @@
 import { Router } from "express";
 import { validateUpdate, validateMovie } from "../middlewares/validateMovie.js"
 import requireApiKey from "../middlewares/requireApiKey.js";
-import { getAllMovies, getMovieById } from "../controllers/movieControllers.js";
+import { createMovie, getAllMovies, getMovieById } from "../controllers/movieControllers.js";
+import { updateMovie } from "../services/movieServices.js";
 
 const router = Router()
 const id = 1
 
 router.get("/", getAllMovies)
 router.get("/:id", getMovieById)
-router.patch("/:id", requireApiKey, validateUpdate, (req, res) => {
-    const movie = req.movie
-    for (const [k, v] of Object.entries(req.body)) {
-        movie[k] = v
-    }
-    return res.status(200).json({
-        message: "Movie updated successfully.",
-        data: movie
-    })
-
-})
-router.post("/", requireApiKey, validateMovie, (req, res) => {
-    const title = req.body.title
-    const genre = req.body.genre
-    const watched = req.body.watched
-    const rating = req.body.rating
-    const newMovie = {
-        "id": id,
-        "title": title,
-        "genre": genre,
-        "watched": watched,
-        "rating": rating
-    }
-    movies.push(newMovie)
-    id++
-    return res.status(201).json({
-        message: "Movie created successfully",
-        data: newMovie
-    })
-})
-router.delete("/:id", requireApiKey, (req, res) => {
-    const movie = movies.find(m => m.id === Number(id))
-    if (!movie) {
-        return res.status(404).json({ message: "Movie not found." })
-    }
-    movies = movies.filter(m => String(m.id) !== req.params.id)
-    return res.status(204)
-})
+router.patch("/:id", requireApiKey, validateUpdate, updateMovie)
+router.post("/", requireApiKey, validateMovie, createMovie)
+router.delete("/:id", requireApiKey,)
 
 export { router }

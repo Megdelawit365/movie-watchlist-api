@@ -1,5 +1,5 @@
 import movies from "../data/movies.js"
-
+let id = 1
 
 const getAllMovies = () => {
     const filteredMovies = [...movies]
@@ -29,4 +29,37 @@ const getMovieById = (id) => {
     return movie
 }
 
-export { getAllMovies, getMovieById }
+const updateMovie = (body, movie) => {
+    for (const [k, v] of Object.entries(req.body)) {
+        movie[k] = v
+    }
+    return movie
+}
+const createMovie = (body) => {
+    const title = body.title
+    const genre = body.genre
+    const watched = body.watched
+    const rating = body.rating
+
+    const newMovie = {
+        "id": id,
+        "title": title,
+        "genre": genre,
+        "watched": watched,
+        "rating": rating
+    }
+    movies.push(newMovie)
+    id++
+
+    return newMovie
+}
+const deleteMovie = (id) => {
+    const movie = movies.find(m => m.id === Number(id))
+    if (!movie) {
+        return null
+    }
+    movies = movies.filter(m => String(m.id) !== id)
+    return true
+}
+
+export { getAllMovies, getMovieById, updateMovie, createMovie, deleteMovie }
