@@ -73,4 +73,4 @@ const validateMovie = (req, res, next) => {
     next()
 }
 
-export default { validateUpdate, validateMovie }
+export { validateUpdate, validateMovie }

@@ -1,4 +1,4 @@
-export default movies = [
+const movies = [
     {
         "id": 1,
         "title": "Arrival",
@@ -8,3 +8,5 @@ export default movies = [
     }
 
 ]
+
+export default movies
