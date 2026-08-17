@@ -46,7 +46,7 @@ const deleteMovie = (req, res) => {
     if (!movie) {
         return res.status(404).json({ message: "Movie not found." })
     }
-    return res.status(204)
+    return res.status(204).send()
 }
 
 export { getAllMovies, getMovieById, updateMovie, createMovie, deleteMovie }
