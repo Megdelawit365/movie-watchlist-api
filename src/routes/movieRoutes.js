@@ -1,32 +1,12 @@
 import { Router } from "express";
-import movies from "../data/movies.js"
 import { validateUpdate, validateMovie } from "../middlewares/validateMovie.js"
 import requireApiKey from "../middlewares/requireApiKey.js";
+import { getAllMovies } from "../controllers/movieControllers.js";
 
 const router = Router()
 const id = 1
 
-router.get("/", (req, res) => {
-    const filteredMovies = [...movies]
-
-    if ("watched" in req.query) {
-        const watched = req.query.watched
-        filteredMovies = filteredMovies.filter(m => String(m.watched) === watched)
-    }
-    if ("genre" in req.query) {
-        const genre = req.query.genre
-        filteredMovies = filteredMovies.filter(m => String(m.genre) === genre)
-
-    }
-    if ("search" in req.query) {
-        const search = req.query.search
-        filteredMovies = filteredMovies.filter(m => search in String(m.title))
-    }
-
-    return res.status(200).json({
-        data: filteredMovies
-    })
-})
+router.get("/", getAllMovies)
 router.get("/:id", (req, res) => {
     const id = req.params.id
     const movie = movies.find(m => m.id === Number(id))
