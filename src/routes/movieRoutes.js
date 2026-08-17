@@ -1,6 +1,7 @@
 import { Router } from "express";
 import movies from "../data/movies.js"
 import { validateUpdate, validateMovie } from "../middlewares/validateMovie.js"
+import requireApiKey from "../middlewares/requireApiKey.js";
 
 const router = Router()
 const id = 1
@@ -36,7 +37,7 @@ router.get("/:id", (req, res) => {
         data: movie
     })
 })
-router.patch("/:id", validateUpdate, (req, res) => {
+router.patch("/:id", requireApiKey, validateUpdate, (req, res) => {
     const movie = req.movie
     for (const [k, v] of Object.entries(req.body)) {
         movie[k] = v
@@ -47,7 +48,7 @@ router.patch("/:id", validateUpdate, (req, res) => {
     })
 
 })
-router.post("/", validateMovie, (req, res) => {
+router.post("/", requireApiKey, validateMovie, (req, res) => {
     const title = req.body.title
     const genre = req.body.genre
     const watched = req.body.watched
@@ -66,7 +67,7 @@ router.post("/", validateMovie, (req, res) => {
         data: newMovie
     })
 })
-router.delete("/:id", (req, res) => {
+router.delete("/:id", requireApiKey, (req, res) => {
     const movie = movies.find(m => m.id === Number(id))
     if (!movie) {
         return res.status(404).json({ message: "Movie not found." })
