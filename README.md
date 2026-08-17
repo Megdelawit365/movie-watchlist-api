@@ -63,3 +63,4 @@ movie-watchlist-api/
 
 ## Demo
 
+https://github.com/user-attachments/assets/ee77a2b8-153d-4f53-84be-e6ec67bbfb97
