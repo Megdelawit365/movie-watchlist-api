@@ -93,3 +93,41 @@ INNER JOIN genres ON movie_genres.genre_id = genres.id;
 
 -- more --
 
+SELECT * FROM movies
+WHERE user_id = 1;
+
+SELECT * FROM movies
+WHERE user_id = 1 AND watched = true;
+
+SELECT * FROM movies
+WHERE rating >= 4;
+
+SELECT * FROM movies
+WHERE genre = Sci-Fi;
+
+SELECT genres.name
+FROM genres
+JOIN movie_genres ON genres.id = movie_genres.genre_id
+JOIN movies ON movie_genres.movie_id = 1;
+
+SELECT DISTINCT users.id, users.name, users.email
+FROM users
+JOIN movies ON movies.user_id = users.id;
+
+SELECT title, user_id
+FROM movies
+WHERE watched = false;
+
+SELECT * 
+FROM movies
+WHERE title ILIKE '%star%';
+
+SELECT * FROM movies
+WHERE rating IS NOT NULL
+ORDER BY rating DESC
+LIMIT 5;
+
+SELECT *
+FROM movies
+ORDER BY title ASC
+LIMIT 5;
