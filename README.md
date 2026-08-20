@@ -61,6 +61,48 @@ movie-watchlist-api/
 - PATCH  /api/movies/:id  # Update a movie (requires API key)
 - DELETE /api/movies/:id  # Delete a movie (requires API key)
 
+## Database Design
+
+### Tables Overview
+
+- users
+  - Purpose: Stores user accounts.
+  - Primary Key: id
+  - Foreign Keys: None
+
+- profiles
+  - Purpose: Stores profile information of users.
+  - Primary Key: id
+  - Foreign Keys: user_id (references users.id)
+
+- movies
+  - Purpose: Stores movies added to user watchlists.
+  - Primary Key: id
+  - Foreign Keys: user_id (references users.id)
+
+- genres
+  - Purpose: Stores movie genres.
+  - Primary Key: id
+  - Foreign Keys: None
+
+- movie_genres
+  - Purpose: table connecting movies to their genres.
+  - Primary Key:  (movie_id, genre_id)
+  - Foreign Keys: movie_id (references movies.id), genre_id (references genres.id)
+
+---
+
+### Database relationships
+
+- One-to-one (users - profiles)
+  - Each user has only one profile. 
+
+- One-to-many (users - movies)
+  - one user can add multiple movies to their watchlist, but each movie belongs to one user. 
+
+- Many-to-many (movies - genres)
+  - A movie can belong to multiple genres, and a genre can contain multiple movies.
+
 ## Demo
 
 https://github.com/user-attachments/assets/ee77a2b8-153d-4f53-84be-e6ec67bbfb97
